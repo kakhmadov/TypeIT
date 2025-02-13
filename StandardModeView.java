@@ -111,7 +111,7 @@ public class StandardModeView extends JPanel {
     public static void main(String[] args) {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(new StandardModeView());
+        frame.getContentPane().add(new FragenVerwaltenView());
         frame.setSize(500,500);
         frame.setVisible(true);
     }

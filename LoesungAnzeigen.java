@@ -31,8 +31,6 @@ public class LoesungAnzeigen extends JPanel {
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.setOpaque(false);
 
-
-
         // Satz, den der Benutzer korrigieren soll
         sentenceLabel = new JLabel("<html> <h2>Die Lösung lautet: </h2></html> ", SwingConstants.CENTER);
         sentenceLabel.setFont(new Font("Serif", Font.PLAIN, 16));
@@ -43,6 +41,7 @@ public class LoesungAnzeigen extends JPanel {
         // Eingabefeld für die Antwort
         answerField = new JTextField("Hier steht die Lösung.");
         answerField.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        answerField.setEditable(false);
         answerField.setHorizontalAlignment(JTextField.CENTER);
         mainPanel.add(Box.createVerticalStrut(10));
         mainPanel.add(answerField);
@@ -54,9 +53,10 @@ public class LoesungAnzeigen extends JPanel {
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
         bottomPanel.setOpaque(false);
 
+        // Fehlende Initialisierung des Buttons
+        showSolutionButton = new JButton("Lösung verbergen");
 
         bottomPanel.add(showSolutionButton);
-
         add(bottomPanel, BorderLayout.SOUTH);
     }
 
@@ -64,8 +64,6 @@ public class LoesungAnzeigen extends JPanel {
     public JButton getExitButton() {
         return exitButton;
     }
-
-
 
     public JButton getShowSolutionButton() {
         return showSolutionButton;
@@ -78,13 +76,12 @@ public class LoesungAnzeigen extends JPanel {
     public JLabel getSentenceLabel() {
         return sentenceLabel;
     }
+
     public static void main(String[] args) {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(new LoesungAnzeigen());
-        frame.setSize(500,500);
+        frame.getContentPane().add(new PoolLoeschen());
+        frame.setSize(500,400);
         frame.setVisible(true);
     }
 }
-
-
