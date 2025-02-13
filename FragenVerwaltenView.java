@@ -4,7 +4,7 @@ import java.awt.*;
 public class FragenVerwaltenView extends JPanel {
 
     private JButton btnFrageHinzufuegen;
-    private JButton btnFrageBearbeiten;
+ //   private JButton btnFrageBearbeiten;
     private JButton btnFrageLoeschen;
     private JButton btnZurueck;
     private JLabel lblTitle;
@@ -28,15 +28,15 @@ public class FragenVerwaltenView extends JPanel {
         centerPanel.setOpaque(false);
 
         btnFrageHinzufuegen = new JButton("Frage hinzufügen");
-        btnFrageBearbeiten = new JButton("Frage bearbeiten");
+       // btnFrageBearbeiten = new JButton("Bearbeiten");
         btnFrageLoeschen = new JButton("Frage löschen");
 
         btnFrageHinzufuegen.setFont(new Font("Serif", Font.ITALIC, 18));
-        btnFrageBearbeiten.setFont(new Font("Serif", Font.ITALIC, 18));
+    //    btnFrageBearbeiten.setFont(new Font("Serif", Font.ITALIC, 18));
         btnFrageLoeschen.setFont(new Font("Serif", Font.ITALIC, 18));
 
         centerPanel.add(btnFrageHinzufuegen);
-        centerPanel.add(btnFrageBearbeiten);
+    //    centerPanel.add(btnFrageBearbeiten);
         centerPanel.add(btnFrageLoeschen);
 
         centerPanelWrapper.add(centerPanel);
@@ -55,9 +55,9 @@ public class FragenVerwaltenView extends JPanel {
         return btnFrageHinzufuegen;
     }
 
-    public JButton getBtnFrageBearbeiten() {
-        return btnFrageBearbeiten;
-    }
+  //  public JButton getBtnFrageBearbeiten() {
+    //    return btnFrageBearbeiten;
+    //}
 
     public JButton getBtnFrageLoeschen() {
         return btnFrageLoeschen;

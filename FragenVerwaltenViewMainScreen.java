@@ -46,7 +46,8 @@ public class FragenVerwaltenViewMainScreen extends JPanel {
         btnPool3 = new JButton("Pool 3");
         btnFrageHinzufuegen = new JButton("Hinzufügen");
         btnFrageLoeschen = new JButton("Löschen");
-        btnFrageBearbeiten = new JButton("Bearbeiten");
+        btnFrageBearbeiten = new JButton("1 Mio Euro Gewinnen");
+        btnFrageBearbeiten.setEnabled(false);
 
         Font buttonFont = new Font("Serif", Font.ITALIC, 18);
         btnPool1.setFont(buttonFont);
@@ -74,7 +75,7 @@ public class FragenVerwaltenViewMainScreen extends JPanel {
         centerPanel.add(btnFrageLoeschen, gbc);
 
         gbc.gridy = 2;
-        centerPanel.add(btnFrageBearbeiten, gbc);
+       centerPanel.add(btnFrageBearbeiten, gbc);
 
         add(centerPanel, BorderLayout.CENTER);
 
@@ -92,7 +93,7 @@ public class FragenVerwaltenViewMainScreen extends JPanel {
         return btnFrageHinzufuegen;
     }
 
-    public JButton getBtnFrageBearbeiten() {
+   public JButton getBtnFrageBearbeiten() {
         return btnFrageBearbeiten;
     }
 

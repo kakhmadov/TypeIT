@@ -9,6 +9,7 @@ public class StandardModeView extends JPanel {
     private JButton showSolutionButton;
     private JTextField answerField;
     private JLabel sentenceLabel;
+    private String frage;
 
     public StandardModeView() {
         setLayout(new BorderLayout());
@@ -46,7 +47,7 @@ public class StandardModeView extends JPanel {
         mainPanel.add(Box.createVerticalStrut(10));
 
         // Satz, den der Benutzer korrigieren soll
-        sentenceLabel = new JLabel("<html><i>Der Junge hatt das Buch, dass auf dem Tisch lag, genommen</i></html>", SwingConstants.CENTER);
+        sentenceLabel = new JLabel(frage, SwingConstants.CENTER);
         sentenceLabel.setFont(new Font("Serif", Font.PLAIN, 16));
         sentenceLabel.setForeground(Color.BLACK);
         sentenceLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -107,6 +108,15 @@ public class StandardModeView extends JPanel {
     public JLabel getSentenceLabel() {
         return sentenceLabel;
     }
+    public String getFrage() {
+        return frage;
+
+    }
+    public void setFrage(String frage) {
+        this.frage= frage;
+        sentenceLabel.setText(frage);
+
+    }
 
     public static void main(String[] args) {
         JFrame frame = new JFrame();
@@ -115,4 +125,5 @@ public class StandardModeView extends JPanel {
         frame.setSize(500,500);
         frame.setVisible(true);
     }
+
 }
