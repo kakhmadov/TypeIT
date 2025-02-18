@@ -9,6 +9,7 @@ public class TypeITController implements ActionListener {
     private TypeITView view;
     private JFrame frame;
     private TypeITModel model;
+    private int aktuellIndex = 0;
 
 
     public TypeITController() {
@@ -27,7 +28,7 @@ public class TypeITController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        StandardModeView modeView = new StandardModeView(this);
         String command = e.getActionCommand();
         switch (command) {
             case "manageQuestions" -> {
@@ -59,19 +60,49 @@ public class TypeITController implements ActionListener {
             case "STANDARD" -> {
                 frame.setVisible(false);
                 frame.getContentPane().removeAll();
-                StandardModeView modeView = new StandardModeView(this);
+                modeView = new StandardModeView(this);
                 frame.setContentPane(modeView);
 
-                String ersteFrage = (String) model.getFragenAntworten().keySet().toArray()[0] ;// Holen der ersten Frage basierend auf dem Index
+                String ersteFrage = (String) model.getFragenAntworten().keySet().toArray()[aktuellIndex] ;// Holen der ersten Frage basierend auf dem Index
+                modeView.setFrage(ersteFrage);
+
+
+
+
+
+
+                frame.revalidate();
+                frame.repaint();
+                frame.setVisible(true);
+
+            }
+            case "PrüfenStandard" -> {
+               boolean richtig =  model.isCorrect((String) model.getFragenAntworten().keySet().toArray()[0], modeView.getAnswerField().getText());
+                if (richtig == true){
+                    JOptionPane.showMessageDialog(null, "Richtige ANTWORT DU HUND");
+                }else{
+                    JOptionPane.showMessageDialog(null,"Falsch du idiot");
+                }
+
+                aktuellIndex++;
+                String ersteFrage = (String) model.getFragenAntworten().keySet().toArray()[aktuellIndex] ;// Holen der ersten Frage basierend auf dem Index
                 modeView.setFrage(ersteFrage);
                 frame.revalidate();
                 frame.repaint();
 
-                frame.setVisible(true);
+
+
+
+
+
+            }
+
+
+
 
 
             }
 
         }
     }
-}
+

@@ -71,6 +71,8 @@ public class StandardModeView extends JPanel {
 
         prevButton = new JButton("<-");
         checkButton = new JButton("PRÜFEN");
+        checkButton.setActionCommand("PrüfenStandard");
+        checkButton.addActionListener(controller);
         nextButton = new JButton("->");
         showSolutionButton = new JButton("Lösung anzeigen");
 
