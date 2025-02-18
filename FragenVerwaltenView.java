@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class FragenVerwaltenView extends JPanel {
 
@@ -8,8 +9,10 @@ public class FragenVerwaltenView extends JPanel {
     private JButton btnFrageLoeschen;
     private JButton btnZurueck;
     private JLabel lblTitle;
+    private TypeITController controller;
 
-    public FragenVerwaltenView() {
+    public FragenVerwaltenView(TypeITController controller) {
+        this.controller = controller;
         setLayout(new BorderLayout());
         setBackground(new Color(96, 105, 99)); // Hintergrundfarbe
 
@@ -28,7 +31,8 @@ public class FragenVerwaltenView extends JPanel {
         centerPanel.setOpaque(false);
 
         btnFrageHinzufuegen = new JButton("Frage hinzufügen");
-       // btnFrageBearbeiten = new JButton("Bearbeiten");
+        btnFrageHinzufuegen.setActionCommand("frageHinzufuegen");
+        btnFrageHinzufuegen.addActionListener(controller);
         btnFrageLoeschen = new JButton("Frage löschen");
 
         btnFrageHinzufuegen.setFont(new Font("Serif", Font.ITALIC, 18));
@@ -43,7 +47,9 @@ public class FragenVerwaltenView extends JPanel {
         add(centerPanelWrapper, BorderLayout.CENTER);
 
         // Zurück-Button (West)
-        btnZurueck = new JButton("Zurück");
+        btnZurueck = new JButton("Home");
+        btnZurueck.setActionCommand("Zurueck");
+        btnZurueck.addActionListener(controller);
         btnZurueck.setFont(new Font("Serif", Font.ITALIC, 16));
         JPanel westPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         westPanel.setOpaque(false);

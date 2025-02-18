@@ -77,11 +77,5 @@ public class LoesungAnzeigen extends JPanel {
         return sentenceLabel;
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(new FragenVerwaltenView());
-        frame.setSize(500,400);
-        frame.setVisible(true);
-    }
+
 }

@@ -1,7 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
-public class FragenVerwaltenViewMainScreen extends JPanel {
+public class FragenVerwaltenViewMainScreen extends JPanel{
 
     private JButton btnFrageHinzufuegen;
     private JButton btnFrageBearbeiten;
@@ -12,8 +13,16 @@ public class FragenVerwaltenViewMainScreen extends JPanel {
     private JButton btnPool3;
     private JLabel lblTitle;
     private JLabel lblInstruction;
+    private TypeITController controller;
 
-    public FragenVerwaltenViewMainScreen() {
+
+    public FragenVerwaltenViewMainScreen(TypeITController controller) {
+        //this.controller = new TypeITController();
+
+    // setTitle("Fragen Verwalten");
+    //  setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(500,500);
+
         setLayout(new BorderLayout());
         setBackground(new Color(96, 105, 99)); // Hintergrundfarbe
 
@@ -42,6 +51,8 @@ public class FragenVerwaltenViewMainScreen extends JPanel {
         gbc.weighty = 1.0;
 
         btnPool1 = new JButton("Pool 1");
+        btnPool1.setActionCommand("pool1");
+        btnPool1.addActionListener(controller);
         btnPool2 = new JButton("Pool 2");
         btnPool3 = new JButton("Pool 3");
         btnFrageHinzufuegen = new JButton("Hinzufügen");
@@ -82,12 +93,17 @@ public class FragenVerwaltenViewMainScreen extends JPanel {
         // Zurück-Button (Links)
         btnZurueck = new JButton("Zurück");
         btnZurueck.setFont(buttonFont);
+        btnZurueck.setActionCommand("Zurueck");
+        btnZurueck.addActionListener(controller);
 
         JPanel leftPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         leftPanel.setOpaque(false);
         leftPanel.add(btnZurueck);
         add(leftPanel, BorderLayout.WEST);
+        setVisible(true);
+
     }
+
 
     public JButton getBtnFrageHinzufuegen() {
         return btnFrageHinzufuegen;
@@ -104,5 +120,10 @@ public class FragenVerwaltenViewMainScreen extends JPanel {
     public JButton getBtnZurueck() {
         return btnZurueck;
     }
+
+    public JButton getBtnPool1() {
+        return btnPool1;
+    }
+
 }
 //500 400 Fenstergrößr

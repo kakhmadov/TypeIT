@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -30,5 +31,10 @@ public class TypeITModel {
     }
     public Map<String, String> getFragenAntworten() {
         return fragenAntworten;
+    }
+    public void setFragenAntworten(Map<String, String> fragenAntworten) {
+        this.fragenAntworten = fragenAntworten;
+        fragenAntworten.put(JOptionPane.showInputDialog("Geben Sie hier Ihre Frage ein" ) , JOptionPane.showInputDialog("Geben Sie eine Antwort ein") );
+
     }
 }

@@ -10,8 +10,10 @@ public class StandardModeView extends JPanel {
     private JTextField answerField;
     private JLabel sentenceLabel;
     private String frage;
+    private TypeITController controller;
 
-    public StandardModeView() {
+    public StandardModeView(TypeITController controller) {
+        this.controller = controller;
         setLayout(new BorderLayout());
         setBackground(new Color(64, 79, 79));
 
@@ -118,12 +120,6 @@ public class StandardModeView extends JPanel {
 
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(new FragenVerwaltenView());
-        frame.setSize(500,500);
-        frame.setVisible(true);
-    }
+
 
 }

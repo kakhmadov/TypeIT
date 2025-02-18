@@ -2,59 +2,76 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
+import java.util.TreeMap;
 
-public class TypeITController {
-    private TypeITModel model;
+public class TypeITController implements ActionListener {
+  //  private TypeITModel model;
     private TypeITView view;
-
-    public TypeITController(TypeITModel model, TypeITView view) {
-        /*
-        Nur zum Testen !
-         */
-        Map<String, String> fragenAntworten = model.getFragenAntworten();
-        fragenAntworten.put("Su HUND ?" , "Du Hund !");
+    private JFrame frame;
+    private TypeITModel model;
 
 
-
-
-
-
-        this.model = model;
-        this.view = view;
-        this.view.getStandardButton().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                view.getContentPane().removeAll();
-                StandardModeView standardModeView = new StandardModeView();
-                String aktuelleFrage = fragenAntworten.keySet().iterator().next();
-                standardModeView.setFrage(aktuelleFrage);
-                standardModeView.getCheckButton().addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        if(model.isCorrect(aktuelleFrage,standardModeView.getAnswerField().getText())){
-                            JOptionPane.showMessageDialog(view.getContentPane(), "Correct !");
-                        }else{
-                            JOptionPane.showMessageDialog(view.getContentPane(), "Wrong !");
-                        }
-                    }
-                });
-                view.setContentPane(standardModeView);
-                view.revalidate();
-                view.repaint();
-            }
-        });
-
-
-
+    public TypeITController() {
+        view = new TypeITView(this);
+       frame = view;
+       Map fragenAntworten = new TreeMap();
+       model = new TypeITModel(fragenAntworten);
 
     }
+
 
     public static void main(String[] args) {
-        TypeITController controller = new TypeITController(new TypeITModel(null) , new TypeITView());
-
-
+        new TypeITController();
     }
 
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        String command = e.getActionCommand();
+        switch (command) {
+            case "manageQuestions" -> {
+                frame.setVisible(false);
+                frame.getContentPane().removeAll();
+                frame.setContentPane( new FragenVerwaltenViewMainScreen(this) );
+                frame.revalidate();
+                frame.repaint();
+                frame.setVisible(true);
+            }
+            case "Zurueck" -> {
+                frame.setVisible(false);
+                frame = new TypeITView(this);
+                frame.revalidate();
+                frame.repaint();
+                frame.setVisible(true);
+            }
+            case "pool1" -> {
+                frame.setVisible(false);
+                frame.getContentPane().removeAll();
+                frame.setContentPane(new FragenVerwaltenView(this));
+                frame.revalidate();
+                frame.repaint();
+                frame.setVisible(true);
+            }
+            case "frageHinzufuegen" -> {
+                model.setFragenAntworten(model.getFragenAntworten());
+            }
+            case "STANDARD" -> {
+                frame.setVisible(false);
+                frame.getContentPane().removeAll();
+                StandardModeView modeView = new StandardModeView(this);
+                frame.setContentPane(modeView);
+
+                String ersteFrage = (String) model.getFragenAntworten().keySet().toArray()[0] ;// Holen der ersten Frage basierend auf dem Index
+                modeView.setFrage(ersteFrage);
+                frame.revalidate();
+                frame.repaint();
+
+                frame.setVisible(true);
 
 
+            }
 
+        }
+    }
 }
