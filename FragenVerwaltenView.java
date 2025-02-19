@@ -34,6 +34,8 @@ public class FragenVerwaltenView extends JPanel {
         btnFrageHinzufuegen.setActionCommand("frageHinzufuegen");
         btnFrageHinzufuegen.addActionListener(controller);
         btnFrageLoeschen = new JButton("Frage löschen");
+        btnFrageLoeschen.setActionCommand("frageLoeschen");
+        btnFrageLoeschen.addActionListener(controller);
 
         btnFrageHinzufuegen.setFont(new Font("Serif", Font.ITALIC, 18));
     //    btnFrageBearbeiten.setFont(new Font("Serif", Font.ITALIC, 18));
@@ -57,20 +59,6 @@ public class FragenVerwaltenView extends JPanel {
         add(westPanel, BorderLayout.WEST);
     }
 
-    public JButton getBtnFrageHinzufuegen() {
-        return btnFrageHinzufuegen;
-    }
 
-  //  public JButton getBtnFrageBearbeiten() {
-    //    return btnFrageBearbeiten;
-    //}
-
-    public JButton getBtnFrageLoeschen() {
-        return btnFrageLoeschen;
-    }
-
-    public JButton getBtnZurueck() {
-        return btnZurueck;
-    }
 }
 // Fenster Größe aut  300 und 225 und nicht veränderbar machen

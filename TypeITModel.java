@@ -27,7 +27,7 @@ public class TypeITModel {
 
     // Methode, um die Antwort der Frage zurückzugeben
     public String showAnswer(String frage) {
-        // Gibt die Antwort zurück, die mit der Frage in der Map verknüpft ist
+
         return fragenAntworten.getOrDefault(frage, "Keine Antwort gefunden");
     }
     public Map<String, String> getFragenAntworten() {
@@ -38,4 +38,5 @@ public class TypeITModel {
         fragenAntworten.put(JOptionPane.showInputDialog("Geben Sie hier Ihre Frage ein" ) , JOptionPane.showInputDialog("Geben Sie eine Antwort ein") );
 
     }
+
 }

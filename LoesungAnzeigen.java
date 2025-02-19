@@ -1,6 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-
+// Diese Klasse wird nicht mehr benötigt
 public class LoesungAnzeigen extends JPanel {
     private JButton exitButton;
     private JButton showSolutionButton;

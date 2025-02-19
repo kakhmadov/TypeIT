@@ -23,6 +23,8 @@ public class StandardModeView extends JPanel {
         topPanel.setOpaque(false);
 
         exitButton = new JButton("Beenden");
+        exitButton.setActionCommand("Zurueck");
+        exitButton.addActionListener(controller);
         exitButton.setFocusable(false);
         topPanel.add(exitButton, BorderLayout.WEST);
 
@@ -71,11 +73,17 @@ public class StandardModeView extends JPanel {
         bottomPanel.setOpaque(false);
 
         prevButton = new JButton("<-");
+        prevButton.setActionCommand("Prev");
+        prevButton.addActionListener(controller);
         checkButton = new JButton("PRÜFEN");
         checkButton.setActionCommand("PrüfenStandard");
         checkButton.addActionListener(controller);
         nextButton = new JButton("->");
+        nextButton.setActionCommand("Next");
+        nextButton.addActionListener(controller);
         showSolutionButton = new JButton("Lösung anzeigen");
+        showSolutionButton.setActionCommand("showSolution");
+        showSolutionButton.addActionListener(controller);
 
         bottomPanel.add(prevButton);
         bottomPanel.add(checkButton);

@@ -11,6 +11,7 @@ public class TypeITController implements ActionListener {
     private TypeITModel model;
     private int aktuellIndex = 0;
     private StandardModeView modeView = new StandardModeView(this);
+    private FrageLoeschen loeschen = new FrageLoeschen(this);
 
 
 
@@ -74,7 +75,11 @@ public class TypeITController implements ActionListener {
 
                 }catch (Exception ex){
                     JOptionPane.showMessageDialog(frame, "Sie müssen zuerst einen Fragepool hinzufügen um zu Spielen");
-
+                    frame.setVisible(false);
+                    frame = new TypeITView(this);
+                    frame.revalidate();
+                    frame.repaint();
+                    frame.setVisible(true);
                 }
 
 
@@ -97,9 +102,9 @@ public class TypeITController implements ActionListener {
 
 
                 if (richtig){
-                    JOptionPane.showMessageDialog(null, "Richtig");
+                    JOptionPane.showMessageDialog(frame, "Richtig Bravo :)");
                 }else{
-                    JOptionPane.showMessageDialog(null,"Falsch");
+                    JOptionPane.showMessageDialog(frame,"Diesen Satz solltest du dir lieber noch einmal anschauen :(");
                 }
 
 
@@ -108,6 +113,61 @@ public class TypeITController implements ActionListener {
 
 
             }
+            case "showSolution" ->{
+                JOptionPane.showMessageDialog(frame,"Die richtige Antwort lautet:\n "  + model.showAnswer(modeView.getFrage())); ;
+            }
+            case "Next" ->{
+                if (aktuellIndex < model.getFragenAntworten().size() - 1) {
+                    aktuellIndex++;
+                }else{
+                    JOptionPane.showMessageDialog(frame,"Sie haben das Ende Ihres Fragepools errreicht");
+                }
+                String ersteFrage = (String) model.getFragenAntworten().keySet().toArray()[aktuellIndex] ;// Holen der ersten Frage basierend auf dem Index
+                modeView = new StandardModeView(this);
+                modeView.setFrage(ersteFrage);
+                frame.getContentPane().removeAll();
+                frame.setContentPane( modeView );
+                frame.revalidate();
+                frame.repaint();
+            }
+            case "Prev" ->{
+                if (aktuellIndex > 0) {
+                    aktuellIndex--;
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Sie haben den Anfang Ihres Fragepools erreicht.");
+                }
+                String ersteFrage = (String) model.getFragenAntworten().keySet().toArray()[aktuellIndex] ;// Holen der ersten Frage basierend auf dem Index
+                modeView = new StandardModeView(this);
+                modeView.setFrage(ersteFrage);
+                frame.getContentPane().removeAll();
+                frame.setContentPane( modeView );
+                frame.revalidate();
+                frame.repaint();
+            }
+            case "frageLoeschen" -> {
+                loeschen = new FrageLoeschen(this);
+                for(String key : model.getFragenAntworten().keySet()){
+                    loeschen.getComboBox().addItem(key);
+                }
+                frame.setVisible(false);
+                frame.getContentPane().removeAll();
+                frame.setContentPane(loeschen);
+                frame.revalidate();
+                frame.repaint();
+                frame.setVisible(true);
+            }
+            case "loeschenFinal" ->{
+                String selectedKey = (String) loeschen.getComboBox().getSelectedItem(); // Ausgewählten Schlüssel holen
+                if (selectedKey != null && model.getFragenAntworten().containsKey(selectedKey)) {
+                    model.getFragenAntworten().remove(selectedKey); // Löschen des Elements aus der Map
+                    loeschen.getComboBox().removeItem(selectedKey); // Entfernen des Elements aus der JComboBox
+                    JOptionPane.showMessageDialog(frame, "Die Frage wurde gelöscht.");
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Es wurde keine gültige Frage ausgewählt.");
+                }
+            }
+
+
 
 
 
