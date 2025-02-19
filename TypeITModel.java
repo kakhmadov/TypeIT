@@ -16,12 +16,13 @@ public class TypeITModel {
 
     public boolean isCorrect(String frage, String userAntwort) {
         // Überprüfen, ob die Frage in der Map vorhanden ist und die Antwort des Benutzers korrekt ist
-        if (fragenAntworten.containsKey(frage) && fragenAntworten.get(frage).equalsIgnoreCase(userAntwort)) {
+        if (fragenAntworten.containsKey(frage) && fragenAntworten.get(frage).equals(userAntwort)) {
             this.isCorrect = true;
         } else {
             this.isCorrect = false;
         }
         return this.isCorrect;
+
     }
 
     // Methode, um die Antwort der Frage zurückzugeben

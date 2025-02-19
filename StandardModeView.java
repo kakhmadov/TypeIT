@@ -7,9 +7,10 @@ public class StandardModeView extends JPanel {
     private JButton checkButton;
     private JButton nextButton;
     private JButton showSolutionButton;
-    private JTextField answerField;
+    private JTextField answerField ;
     private JLabel sentenceLabel;
     private String frage;
+    private String antwort;
     private TypeITController controller;
 
     public StandardModeView(TypeITController controller) {
@@ -38,7 +39,7 @@ public class StandardModeView extends JPanel {
         mainPanel.setOpaque(false);
 
         // Anweisungstext
-        JLabel instructionText = new JLabel("In diesen Sätzen haben sich einige Fehler\n eingeschlichen. Kannst du sie finden?");
+        JLabel instructionText = new JLabel(antwort);
         instructionText.setFont(new Font("SansSerif", Font.PLAIN, 14));
         instructionText.setOpaque(true);
         instructionText.setBackground(Color.WHITE);
@@ -49,14 +50,14 @@ public class StandardModeView extends JPanel {
         mainPanel.add(Box.createVerticalStrut(10));
 
         // Satz, den der Benutzer korrigieren soll
-        sentenceLabel = new JLabel(frage, SwingConstants.CENTER);
+        sentenceLabel = new JLabel("Hier kommt Ihre Antwort hin !");
         sentenceLabel.setFont(new Font("Serif", Font.PLAIN, 16));
         sentenceLabel.setForeground(Color.BLACK);
         sentenceLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         mainPanel.add(sentenceLabel);
 
         // Eingabefeld für die Antwort
-        answerField = new JTextField("Geben Sie hier Ihre Antwort ein.");
+        answerField = new JTextField("Ersetzen Sie diesen Text mit Ihrer Anwort");
         answerField.setFont(new Font("SansSerif", Font.PLAIN, 14));
         answerField.setHorizontalAlignment(JTextField.CENTER);
         mainPanel.add(Box.createVerticalStrut(10));

@@ -10,6 +10,8 @@ public class TypeITController implements ActionListener {
     private JFrame frame;
     private TypeITModel model;
     private int aktuellIndex = 0;
+    private StandardModeView modeView = new StandardModeView(this);
+
 
 
     public TypeITController() {
@@ -28,7 +30,7 @@ public class TypeITController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        StandardModeView modeView = new StandardModeView(this);
+
         String command = e.getActionCommand();
         switch (command) {
             case "manageQuestions" -> {
@@ -77,18 +79,27 @@ public class TypeITController implements ActionListener {
 
             }
             case "PrüfenStandard" -> {
-               boolean richtig =  model.isCorrect((String) model.getFragenAntworten().keySet().toArray()[0], modeView.getAnswerField().getText());
-                if (richtig == true){
-                    JOptionPane.showMessageDialog(null, "Richtige ANTWORT DU HUND");
-                }else{
-                    JOptionPane.showMessageDialog(null,"Falsch du idiot");
+                System.out.println(modeView.getAnswerField().getText());
+                boolean richtig =  model.isCorrect((String) model.getFragenAntworten().keySet().toArray()[aktuellIndex], modeView.getAnswerField().getText());
+
+                if (aktuellIndex < model.getFragenAntworten().size() - 1) {
+                    aktuellIndex++;
                 }
 
-                aktuellIndex++;
                 String ersteFrage = (String) model.getFragenAntworten().keySet().toArray()[aktuellIndex] ;// Holen der ersten Frage basierend auf dem Index
+                modeView = new StandardModeView(this);
                 modeView.setFrage(ersteFrage);
+                frame.getContentPane().removeAll();
+                frame.setContentPane( modeView );
                 frame.revalidate();
                 frame.repaint();
+
+
+                if (richtig){
+                    JOptionPane.showMessageDialog(null, "Richtig");
+                }else{
+                    JOptionPane.showMessageDialog(null,"Falsch");
+                }
 
 
 
