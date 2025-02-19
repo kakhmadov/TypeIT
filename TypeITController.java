@@ -60,22 +60,23 @@ public class TypeITController implements ActionListener {
                 model.setFragenAntworten(model.getFragenAntworten());
             }
             case "STANDARD" -> {
-                frame.setVisible(false);
-                frame.getContentPane().removeAll();
-                modeView = new StandardModeView(this);
-                frame.setContentPane(modeView);
+                try{
 
-                String ersteFrage = (String) model.getFragenAntworten().keySet().toArray()[aktuellIndex] ;// Holen der ersten Frage basierend auf dem Index
-                modeView.setFrage(ersteFrage);
+                    frame.setVisible(false);
+                    frame.getContentPane().removeAll();
+                    modeView = new StandardModeView(this);
+                    frame.setContentPane(modeView);
+                    frame.revalidate();
+                    frame.repaint();
+                    frame.setVisible(true);
+                    String ersteFrage = (String) model.getFragenAntworten().keySet().toArray()[aktuellIndex] ;// Holen der ersten Frage basierend auf dem Index
+                    modeView.setFrage(ersteFrage);
 
+                }catch (Exception ex){
+                    JOptionPane.showMessageDialog(frame, "Sie müssen zuerst einen Fragepool hinzufügen um zu Spielen");
 
+                }
 
-
-
-
-                frame.revalidate();
-                frame.repaint();
-                frame.setVisible(true);
 
             }
             case "PrüfenStandard" -> {
