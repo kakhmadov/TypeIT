@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class TypeITView extends JFrame {
     private JButton standardButton;
@@ -55,9 +54,16 @@ public class TypeITView extends JFrame {
         standardButton = new JButton("Standart");
         standardButton.setActionCommand("STANDARD");
         standardButton.addActionListener(controller);
+
         hangmanButton = new JButton("Hang-Man");
+
         quizButton = new JButton("Quiz");
+        quizButton.setActionCommand("QUIZ");  // ✅ Now the ActionCommand is set
+        quizButton.addActionListener(controller);  // ✅ Now it is connected to the Controller
+
         manageQuestionsButton = new JButton("Fragen-Verwalten");
+        manageQuestionsButton.setActionCommand("manageQuestions");
+        manageQuestionsButton.addActionListener(controller);
 
         standardButton.setPreferredSize(new Dimension(200, 50));
         hangmanButton.setPreferredSize(new Dimension(200, 50));
@@ -86,8 +92,6 @@ public class TypeITView extends JFrame {
         mainPanel.add(bottomPanel, BorderLayout.CENTER);
         add(mainPanel, BorderLayout.CENTER);
 
-        manageQuestionsButton.setActionCommand("manageQuestions");
-        manageQuestionsButton.addActionListener(this.controller);
         setVisible(true);
     }
 

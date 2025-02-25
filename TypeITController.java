@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class TypeITController implements ActionListener {
-  //  private TypeITModel model;
     private TypeITView view;
     private JFrame frame;
     private TypeITModel model;
@@ -13,31 +12,25 @@ public class TypeITController implements ActionListener {
     private StandardModeView modeView = new StandardModeView(this);
     private FrageLoeschen loeschen = new FrageLoeschen(this);
 
-
-
     public TypeITController() {
         view = new TypeITView(this);
-       frame = view;
-       Map fragenAntworten = new TreeMap();
-       model = new TypeITModel(fragenAntworten);
-
+        frame = view;
+        Map<String, String> fragenAntworten = new TreeMap<>();
+        model = new TypeITModel(fragenAntworten);
     }
-
 
     public static void main(String[] args) {
         new TypeITController();
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
-
         String command = e.getActionCommand();
         switch (command) {
             case "manageQuestions" -> {
                 frame.setVisible(false);
                 frame.getContentPane().removeAll();
-                frame.setContentPane( new FragenVerwaltenViewMainScreen(this) );
+                frame.setContentPane(new FragenVerwaltenViewMainScreen(this));
                 frame.revalidate();
                 frame.repaint();
                 frame.setVisible(true);
@@ -61,8 +54,7 @@ public class TypeITController implements ActionListener {
                 model.setFragenAntworten(model.getFragenAntworten());
             }
             case "STANDARD" -> {
-                try{
-
+                try {
                     frame.setVisible(false);
                     frame.getContentPane().removeAll();
                     modeView = new StandardModeView(this);
@@ -70,83 +62,96 @@ public class TypeITController implements ActionListener {
                     frame.revalidate();
                     frame.repaint();
                     frame.setVisible(true);
-                    String ersteFrage = (String) model.getFragenAntworten().keySet().toArray()[aktuellIndex] ;// Holen der ersten Frage basierend auf dem Index
+                    String ersteFrage = (String) model.getFragenAntworten().keySet().toArray()[aktuellIndex];
                     modeView.setFrage(ersteFrage);
-
-                }catch (Exception ex){
-                    JOptionPane.showMessageDialog(frame, "Sie müssen zuerst einen Fragepool hinzufügen um zu Spielen");
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(frame, "Sie müssen zuerst einen Fragepool hinzufügen um zu spielen.");
                     frame.setVisible(false);
                     frame = new TypeITView(this);
                     frame.revalidate();
                     frame.repaint();
                     frame.setVisible(true);
                 }
-
-
             }
+
+            // --- QUIZ MODE (NEW FUNCTIONALITY) ---
+            case "QUIZ" -> {
+                try {
+                    frame.setVisible(false);
+                    frame.getContentPane().removeAll();
+                    frame.setContentPane(new QuizView(this)); // Switches to QuizView
+                    frame.revalidate();
+                    frame.repaint();
+                    frame.setVisible(true);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(frame, "Ein Fehler ist aufgetreten beim Laden des Quiz-Modus.");
+                    frame.setVisible(false);
+                    frame = new TypeITView(this);
+                    frame.revalidate();
+                    frame.repaint();
+                    frame.setVisible(true);
+                }
+            }
+
             case "PrüfenStandard" -> {
                 System.out.println(modeView.getAnswerField().getText());
-                boolean richtig =  model.isCorrect((String) model.getFragenAntworten().keySet().toArray()[aktuellIndex], modeView.getAnswerField().getText());
+                boolean richtig = model.isCorrect(
+                        (String) model.getFragenAntworten().keySet().toArray()[aktuellIndex],
+                        modeView.getAnswerField().getText()
+                );
 
                 if (aktuellIndex < model.getFragenAntworten().size() - 1) {
                     aktuellIndex++;
                 }
 
-                String ersteFrage = (String) model.getFragenAntworten().keySet().toArray()[aktuellIndex] ;// Holen der ersten Frage basierend auf dem Index
+                String ersteFrage = (String) model.getFragenAntworten().keySet().toArray()[aktuellIndex];
                 modeView = new StandardModeView(this);
                 modeView.setFrage(ersteFrage);
                 frame.getContentPane().removeAll();
-                frame.setContentPane( modeView );
+                frame.setContentPane(modeView);
                 frame.revalidate();
                 frame.repaint();
 
-
-                if (richtig){
+                if (richtig) {
                     JOptionPane.showMessageDialog(frame, "Richtig Bravo :)");
-                }else{
-                    JOptionPane.showMessageDialog(frame,"Diesen Satz solltest du dir lieber noch einmal anschauen :(");
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Diesen Satz solltest du dir lieber noch einmal anschauen :(");
                 }
-
-
-
-
-
-
             }
-            case "showSolution" ->{
-                JOptionPane.showMessageDialog(frame,"Die richtige Antwort lautet:\n "  + model.showAnswer(modeView.getFrage())); ;
+            case "showSolution" -> {
+                JOptionPane.showMessageDialog(frame, "Die richtige Antwort lautet:\n " + model.showAnswer(modeView.getFrage()));
             }
-            case "Next" ->{
+            case "Next" -> {
                 if (aktuellIndex < model.getFragenAntworten().size() - 1) {
                     aktuellIndex++;
-                }else{
-                    JOptionPane.showMessageDialog(frame,"Sie haben das Ende Ihres Fragepools errreicht");
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Sie haben das Ende Ihres Fragepools erreicht.");
                 }
-                String ersteFrage = (String) model.getFragenAntworten().keySet().toArray()[aktuellIndex] ;// Holen der ersten Frage basierend auf dem Index
+                String ersteFrage = (String) model.getFragenAntworten().keySet().toArray()[aktuellIndex];
                 modeView = new StandardModeView(this);
                 modeView.setFrage(ersteFrage);
                 frame.getContentPane().removeAll();
-                frame.setContentPane( modeView );
+                frame.setContentPane(modeView);
                 frame.revalidate();
                 frame.repaint();
             }
-            case "Prev" ->{
+            case "Prev" -> {
                 if (aktuellIndex > 0) {
                     aktuellIndex--;
                 } else {
                     JOptionPane.showMessageDialog(frame, "Sie haben den Anfang Ihres Fragepools erreicht.");
                 }
-                String ersteFrage = (String) model.getFragenAntworten().keySet().toArray()[aktuellIndex] ;// Holen der ersten Frage basierend auf dem Index
+                String ersteFrage = (String) model.getFragenAntworten().keySet().toArray()[aktuellIndex];
                 modeView = new StandardModeView(this);
                 modeView.setFrage(ersteFrage);
                 frame.getContentPane().removeAll();
-                frame.setContentPane( modeView );
+                frame.setContentPane(modeView);
                 frame.revalidate();
                 frame.repaint();
             }
             case "frageLoeschen" -> {
                 loeschen = new FrageLoeschen(this);
-                for(String key : model.getFragenAntworten().keySet()){
+                for (String key : model.getFragenAntworten().keySet()) {
                     loeschen.getComboBox().addItem(key);
                 }
                 frame.setVisible(false);
@@ -156,33 +161,23 @@ public class TypeITController implements ActionListener {
                 frame.repaint();
                 frame.setVisible(true);
             }
-            case "loeschenFinal" ->{
-                String selectedKey = (String) loeschen.getComboBox().getSelectedItem(); // Ausgewählten Schlüssel holen
+            case "loeschenFinal" -> {
+                String selectedKey = (String) loeschen.getComboBox().getSelectedItem();
                 if (selectedKey != null && model.getFragenAntworten().containsKey(selectedKey)) {
-                    model.getFragenAntworten().remove(selectedKey); // Löschen des Elements aus der Map
-                    loeschen.getComboBox().removeItem(selectedKey); // Entfernen des Elements aus der JComboBox
+                    model.getFragenAntworten().remove(selectedKey);
+                    loeschen.getComboBox().removeItem(selectedKey);
                     JOptionPane.showMessageDialog(frame, "Die Frage wurde gelöscht.");
                 } else {
                     JOptionPane.showMessageDialog(frame, "Es wurde keine gültige Frage ausgewählt.");
                 }
             }
-            case "poolSpeichern" ->{
-                TypeITModel.save(model.getFragenAntworten(),"PoolBinary");
+            case "poolSpeichern" -> {
+                TypeITModel.save(model.getFragenAntworten(), "PoolBinary");
             }
-            case "poolLaden" ->{
-                TreeMap<String,String> loadedMap = TypeITModel.load("PoolBinary");
+            case "poolLaden" -> {
+                TreeMap<String, String> loadedMap = TypeITModel.load("PoolBinary");
                 model.setFragenAntworten(loadedMap);
-
             }
-
-
-
-
-
-
-
-            }
-
         }
     }
-
+}
