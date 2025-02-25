@@ -5,8 +5,10 @@ public class FrageLoeschen extends JPanel {
     private TypeITController controller;
     private JComboBox<String> frage;
     private JButton loeschen = new JButton("Löschen");
+    private JButton homeButton = new JButton("Home");
 
     public FrageLoeschen(TypeITController controller) {
+
         this.controller = controller;
         setLayout(new BorderLayout());
         setBackground(new Color(96, 105, 99));
@@ -21,6 +23,10 @@ public class FrageLoeschen extends JPanel {
 
         loeschen.setActionCommand("loeschenFinal");
         loeschen.addActionListener(controller);
+
+        add(homeButton, BorderLayout.WEST);
+        homeButton.setActionCommand("Zurueck");
+        homeButton.addActionListener(controller);
     }
 
 

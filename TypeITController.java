@@ -166,6 +166,14 @@ public class TypeITController implements ActionListener {
                     JOptionPane.showMessageDialog(frame, "Es wurde keine gültige Frage ausgewählt.");
                 }
             }
+            case "poolSpeichern" ->{
+                TypeITModel.save(model.getFragenAntworten(),"PoolBinary");
+            }
+            case "poolLaden" ->{
+                TreeMap<String,String> loadedMap = TypeITModel.load("PoolBinary");
+                model.setFragenAntworten(loadedMap);
+
+            }
 
 
 

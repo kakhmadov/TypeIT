@@ -73,20 +73,20 @@ public class FragenVerwaltenViewMainScreen extends JPanel{
         centerPanel.add(btnPool1, gbc);
 
         gbc.gridy = 1;
-        centerPanel.add(btnPool2, gbc);
+      //  centerPanel.add(btnPool2, gbc);
 
         gbc.gridy = 2;
-        centerPanel.add(btnPool3, gbc);
+    //    centerPanel.add(btnPool3, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 0;
-        centerPanel.add(btnFrageHinzufuegen, gbc);
+       // centerPanel.add(btnFrageHinzufuegen, gbc);
 
         gbc.gridy = 1;
-        centerPanel.add(btnFrageLoeschen, gbc);
+       // centerPanel.add(btnFrageLoeschen, gbc);
 
         gbc.gridy = 2;
-       centerPanel.add(btnFrageBearbeiten, gbc);
+      // centerPanel.add(btnFrageBearbeiten, gbc);
 
         add(centerPanel, BorderLayout.CENTER);
 

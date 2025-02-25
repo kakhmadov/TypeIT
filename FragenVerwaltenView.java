@@ -8,6 +8,8 @@ public class FragenVerwaltenView extends JPanel {
  //   private JButton btnFrageBearbeiten;
     private JButton btnFrageLoeschen;
     private JButton btnZurueck;
+    private JButton poolSpeichern;
+    private JButton poolLaden;
     private JLabel lblTitle;
     private TypeITController controller;
 
@@ -36,6 +38,13 @@ public class FragenVerwaltenView extends JPanel {
         btnFrageLoeschen = new JButton("Frage löschen");
         btnFrageLoeschen.setActionCommand("frageLoeschen");
         btnFrageLoeschen.addActionListener(controller);
+        poolLaden = new JButton("Pool Laden");
+        poolLaden.setActionCommand("poolLaden");
+        poolLaden.addActionListener(controller);
+        poolSpeichern = new JButton("Pool Speichern");
+        poolSpeichern.setActionCommand("poolSpeichern");
+        poolSpeichern.addActionListener(controller);
+
 
         btnFrageHinzufuegen.setFont(new Font("Serif", Font.ITALIC, 18));
     //    btnFrageBearbeiten.setFont(new Font("Serif", Font.ITALIC, 18));
@@ -44,6 +53,8 @@ public class FragenVerwaltenView extends JPanel {
         centerPanel.add(btnFrageHinzufuegen);
     //    centerPanel.add(btnFrageBearbeiten);
         centerPanel.add(btnFrageLoeschen);
+        centerPanel.add(poolLaden);
+        centerPanel.add(poolSpeichern);
 
         centerPanelWrapper.add(centerPanel);
         add(centerPanelWrapper, BorderLayout.CENTER);
