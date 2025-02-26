@@ -11,6 +11,7 @@ public class TypeITController implements ActionListener {
     private TypeITModel model;
     private int aktuellIndex = 0;
     private StandardModeView modeView = new StandardModeView(this);
+    private HangmanView hangmanView = new HangmanView(this);
     private FrageLoeschen loeschen = new FrageLoeschen(this);
 
 
@@ -42,13 +43,14 @@ public class TypeITController implements ActionListener {
                 frame.repaint();
                 frame.setVisible(true);
             }
-            case "Zurueck" -> {
+            case "Zurueck", "HangBEENDEN" -> {
                 frame.setVisible(false);
                 frame = new TypeITView(this);
                 frame.revalidate();
                 frame.repaint();
                 frame.setVisible(true);
             }
+
             case "pool1" -> {
                 frame.setVisible(false);
                 frame.getContentPane().removeAll();
@@ -84,6 +86,19 @@ public class TypeITController implements ActionListener {
 
 
             }
+
+            case "HANGMAN"  ->  {
+                frame.setVisible(false);
+                frame.getContentPane().removeAll();
+                hangmanView = new HangmanView(this);
+                frame.setContentPane(hangmanView);
+                frame.revalidate();
+                frame.repaint();
+                frame.setVisible(true);
+                String ersteFrage = (String) model.getFragenAntworten().keySet().toArray()[aktuellIndex] ;// Holen der ersten Frage basierend auf dem Index
+                hangmanView.setFrage(ersteFrage);
+            }
+
             case "PrüfenStandard" -> {
                 System.out.println(modeView.getAnswerField().getText());
                 boolean richtig =  model.isCorrect((String) model.getFragenAntworten().keySet().toArray()[aktuellIndex], modeView.getAnswerField().getText());
@@ -106,9 +121,6 @@ public class TypeITController implements ActionListener {
                 }else{
                     JOptionPane.showMessageDialog(frame,"Diesen Satz solltest du dir lieber noch einmal anschauen :(");
                 }
-
-
-
 
 
 

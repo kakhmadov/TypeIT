@@ -56,6 +56,8 @@ public class TypeITView extends JFrame {
         standardButton.setActionCommand("STANDARD");
         standardButton.addActionListener(controller);
         hangmanButton = new JButton("Hang-Man");
+        hangmanButton.setActionCommand("HANGMAN");
+        hangmanButton.addActionListener(controller);
         quizButton = new JButton("Quiz");
         manageQuestionsButton = new JButton("Fragen-Verwalten");
 

@@ -7,8 +7,9 @@ public class HangmanView extends JPanel {
     private JTextField txtAnswer;
     private JLabel lblImage;
     private String bildPfad;
+    private String frage;
 
-    public HangmanView() {
+    public HangmanView(TypeITController controller) {
 
         setLayout(new BorderLayout());
         setBackground(new Color(96, 105, 99));  // Setzt die Hintergrundfarbe des Hauptpanels
@@ -17,6 +18,8 @@ public class HangmanView extends JPanel {
         JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         topPanel.setOpaque(false); // Verhindert, dass der Hintergrund des Panels die Farbe überschreibt
         btnBeenden = new JButton("Beenden");
+        btnBeenden.setActionCommand("HangBEENDEN");
+        btnBeenden.addActionListener(controller);
         topPanel.add(btnBeenden);
         add(topPanel, BorderLayout.NORTH);
 
@@ -27,8 +30,14 @@ public class HangmanView extends JPanel {
         // Linker Bereich: Satz und Eingabe
         JPanel textPanel = new JPanel(new BorderLayout());
         textPanel.setOpaque(false); // Verhindert, dass der Hintergrund des Panels die Farbe überschreibt
-        txtSentence = new JTextArea("In diesem Satz hat sich ein Fehler eingeschlichen. Kannst du diesen finden?\n\n" +
-                "Der Junge hat das Buch, dass auf dem Tisch lag, genommen. \n\n\n\n\n\n\n\n\n\n\n");
+
+        txtSentence = new JTextArea("""
+                In diesem Satz hat sich ein Fehler eingeschlichen. Kannst du diesen finden?
+
+                Der Junge hat das Buch, dass auf dem Tisch lag, genommen.""");
+        txtSentence.setPreferredSize(new Dimension(300,400));
+        txtSentence.setLineWrap(true);
+        txtSentence.setWrapStyleWord(true);
         txtSentence.setEditable(false);
         textPanel.add(txtSentence, BorderLayout.NORTH);
         txtAnswer = new JTextField("Geben Sie hier Ihre Antwort ein.");
@@ -51,9 +60,17 @@ public class HangmanView extends JPanel {
         JPanel bottomPanel = new JPanel(new FlowLayout());
         bottomPanel.setOpaque(false); // Verhindert, dass der Hintergrund des Panels die Farbe überschreibt
         btnPrev = new JButton("<-");
+        btnPrev.setActionCommand("HangZUERUCK");
+        btnPrev.addActionListener(controller);
         btnPruefen = new JButton("PRÜFEN");
+        btnPruefen.setActionCommand("HangPRUEFEN");
+        btnPruefen.addActionListener(controller);
         btnNext = new JButton("->");
+        btnNext.setActionCommand("HangNAECHSTES");
+        btnNext.addActionListener(controller);
         btnLoesung = new JButton("Lösung anzeigen");
+        btnLoesung.setActionCommand("HangLOESUNG");
+        btnLoesung.addActionListener(controller);
 
         bottomPanel.add(btnPrev);
         bottomPanel.add(btnPruefen);
@@ -66,4 +83,11 @@ public class HangmanView extends JPanel {
     public void showView() {
         setVisible(true);
     }
+
+    public void setFrage(String frage)  {
+        this.frage=frage;
+        txtSentence.setText(frage);
+    }
 }
+
+
