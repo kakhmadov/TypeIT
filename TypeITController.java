@@ -93,6 +93,52 @@ public class TypeITController implements ActionListener {
                 }
             }
 
+            case "QuizCheck" -> {
+                if (frame.getContentPane() instanceof QuizView quizView) {
+                    String imagePath = quizView.getCurrentImageFile();
+                    String userInput = quizView.getUserAnswer();
+
+                    String imageName = imagePath.replaceAll("[^0-9]", "");
+
+                    String expectedAnswer = switch (imageName) {
+                        case "1" -> "Buecher";
+                        case "2" -> "Glas";
+                        case "3" -> "Schach";
+                        case "4" -> "Jeans";
+                        case "5" -> "Gluehlampe";
+                        case "6" -> "Schuhe";
+                        case "7" -> "Stuhl";
+                        case "8" -> "Kaffe";
+                        case "9" -> "Zahn";
+                        case "10" -> "Parfum";
+                        case "11" -> "Stein";
+                        case "12" -> "Globus";
+                        case "13" -> "Laterne";
+                        case "14" -> "Bleistift";
+                        case "15" -> "Sanduhr";
+                        case "16" -> "Streichholz";
+                        case "17" -> "Schreibmaschine";
+                        case "18" -> "Mond";
+                        case "19" -> "Megafon";
+                        case "20" -> "Lampe";
+                        default -> "Unbekannt";
+                    };
+
+                    if (userInput.equalsIgnoreCase(expectedAnswer)) {
+                        JOptionPane.showMessageDialog(frame, "Richtig! Das ist ein: " + expectedAnswer);
+                    } else {
+                        JOptionPane.showMessageDialog(frame, "Falsch! Die richtige Antwort wäre: " + expectedAnswer);
+                    }
+
+                    frame.setVisible(false);
+                    frame.getContentPane().removeAll();
+                    frame.setContentPane(new QuizView(this));
+                    frame.revalidate();
+                    frame.repaint();
+                    frame.setVisible(true);
+                }
+            }
+
             case "PrüfenStandard" -> {
                 System.out.println(modeView.getAnswerField().getText());
                 boolean richtig = model.isCorrect(
