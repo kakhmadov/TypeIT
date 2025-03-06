@@ -8,6 +8,7 @@ public class HangmanView extends JPanel {
     private JLabel lblImage;
     private String bildPfad;
     private String frage;
+    private HangmanDrawingPanel drawingPanel;
 
     public HangmanView(TypeITController controller) {
 
@@ -45,14 +46,14 @@ public class HangmanView extends JPanel {
         centerPanel.add(textPanel);
 
         // Rechter Bereich: Bilddarstellung
-        lblImage = new JLabel();
-        lblImage.setHorizontalAlignment(SwingConstants.CENTER);
-        lblImage.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        centerPanel.add(lblImage);
+        drawingPanel = new HangmanDrawingPanel();
+        drawingPanel.setPreferredSize(new Dimension(300, 400));
+        drawingPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        centerPanel.add(drawingPanel);
 
         // Bild einfügen
         ImageIcon icon = new ImageIcon(new ImageIcon(bildPfad).getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH));
-        lblImage.setIcon(icon); // Das Bild direkt in lblImage setzen
+        //lblImage.setIcon(icon); // Das Bild direkt in lblImage setzen
 
         add(centerPanel, BorderLayout.CENTER);
 
@@ -88,6 +89,10 @@ public class HangmanView extends JPanel {
     public String getFrage()    {return frage;}
 
     public JTextField getTxtAnswer()    {return this.txtAnswer;}
+
+    public HangmanDrawingPanel getDrawingPanel() {
+        return drawingPanel;
+    }
 }
 
 
