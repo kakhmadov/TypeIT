@@ -83,20 +83,58 @@ public class TypeITController implements ActionListener {
                     frame.repaint();
                     frame.setVisible(true);
                 }
-
-
             }
 
-            case "HANGMAN"  ->  {
-                frame.setVisible(false);
-                frame.getContentPane().removeAll();
+            case "HANGMAN" -> {
+                try {
+
+                    frame.setVisible(false);
+                    frame.getContentPane().removeAll();
+                    hangmanView = new HangmanView(this);
+                    frame.setContentPane(hangmanView);
+                    frame.revalidate();
+                    frame.repaint();
+                    frame.setVisible(true);
+                    String ersteFrage = (String) model.getFragenAntworten().keySet().toArray()[aktuellIndex];// Holen der ersten Frage basierend auf dem Index
+                    hangmanView.setFrage(ersteFrage);
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(frame, "Sie müssen zuerst einen Fragepool hinzufügen um zu Spielen");
+                    frame.setVisible(false);
+                    frame = new TypeITView(this);
+                    frame.revalidate();
+                    frame.repaint();
+                    frame.setVisible(true);
+                }
+            }
+
+            case "HangLOESUNG" ->   {
+                JOptionPane.showMessageDialog(frame,"Die richtige Antwort lautet:\n "  + model.showAnswer(hangmanView.getFrage()));
+            }
+
+            case "HangPRUEFEN" -> {
+
+                System.out.println(hangmanView.getTxtAnswer().getText());
+                boolean richtig =  model.isCorrect((String) model.getFragenAntworten().keySet().toArray()[aktuellIndex], hangmanView.getTxtAnswer().getText());
+
+                if (aktuellIndex < model.getFragenAntworten().size() - 1) {
+                    aktuellIndex++;
+                }
+
+                String ersteFrage = (String) model.getFragenAntworten().keySet().toArray()[aktuellIndex] ;// Holen der ersten Frage basierend auf dem Index
                 hangmanView = new HangmanView(this);
-                frame.setContentPane(hangmanView);
+                hangmanView.setFrage(ersteFrage);
+                frame.getContentPane().removeAll();
+                frame.setContentPane( hangmanView );
                 frame.revalidate();
                 frame.repaint();
-                frame.setVisible(true);
-                String ersteFrage = (String) model.getFragenAntworten().keySet().toArray()[aktuellIndex] ;// Holen der ersten Frage basierend auf dem Index
-                hangmanView.setFrage(ersteFrage);
+
+                if (richtig){
+                    JOptionPane.showMessageDialog(frame, "Richtig Bravo :)");
+                }else{
+                    JOptionPane.showMessageDialog(frame,"Diesen Satz solltest du dir lieber noch einmal anschauen :(");
+                }
+
             }
 
             case "PrüfenStandard" -> {

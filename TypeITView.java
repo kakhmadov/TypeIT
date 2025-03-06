@@ -52,7 +52,7 @@ public class TypeITView extends JFrame {
         buttonPanel.setOpaque(true);
         buttonPanel.setBackground(new Color(64, 79, 79));
 
-        standardButton = new JButton("Standart");
+        standardButton = new JButton("Standard");
         standardButton.setActionCommand("STANDARD");
         standardButton.addActionListener(controller);
         hangmanButton = new JButton("Hang-Man");

@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class HangmanView extends JPanel {
-    private JButton btnBeenden, btnPruefen, btnLoesung, btnNext, btnPrev;
+    private JButton btnBeenden, btnPruefen, btnLoesung, btnNext;
     private JTextArea txtSentence;
     private JTextField txtAnswer;
     private JLabel lblImage;
@@ -59,9 +59,6 @@ public class HangmanView extends JPanel {
         // Untere Steuerleiste mit Buttons
         JPanel bottomPanel = new JPanel(new FlowLayout());
         bottomPanel.setOpaque(false); // Verhindert, dass der Hintergrund des Panels die Farbe überschreibt
-        btnPrev = new JButton("<-");
-        btnPrev.setActionCommand("HangZUERUCK");
-        btnPrev.addActionListener(controller);
         btnPruefen = new JButton("PRÜFEN");
         btnPruefen.setActionCommand("HangPRUEFEN");
         btnPruefen.addActionListener(controller);
@@ -72,7 +69,6 @@ public class HangmanView extends JPanel {
         btnLoesung.setActionCommand("HangLOESUNG");
         btnLoesung.addActionListener(controller);
 
-        bottomPanel.add(btnPrev);
         bottomPanel.add(btnPruefen);
         bottomPanel.add(btnNext);
         bottomPanel.add(btnLoesung);
@@ -88,6 +84,10 @@ public class HangmanView extends JPanel {
         this.frage=frage;
         txtSentence.setText(frage);
     }
+
+    public String getFrage()    {return frage;}
+
+    public JTextField getTxtAnswer()    {return this.txtAnswer;}
 }
 
 
