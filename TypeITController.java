@@ -113,7 +113,7 @@ public class TypeITController implements ActionListener {
             }
 
             case "HangPRUEFEN" -> {
-
+/*
                 System.out.println(hangmanView.getTxtAnswer().getText());
                 boolean richtig =  model.isCorrect((String) model.getFragenAntworten().keySet().toArray()[aktuellIndex], hangmanView.getTxtAnswer().getText());
 
@@ -133,6 +133,24 @@ public class TypeITController implements ActionListener {
                     JOptionPane.showMessageDialog(frame, "Richtig Bravo :)");
                 }else{
                     JOptionPane.showMessageDialog(frame,"Diesen Satz solltest du dir lieber noch einmal anschauen :(");
+                }
+
+ */
+                String userAnswer = hangmanView.getTxtAnswer().getText();
+                String currentQuestion = hangmanView.getFrage();
+                boolean correct = model.isCorrect(currentQuestion, userAnswer);
+
+                if (correct) {
+                    JOptionPane.showMessageDialog(frame, "Richtig! :)");
+                    // Move to next question
+                    if (aktuellIndex < model.getFragenAntworten().size() - 1) {
+                        aktuellIndex++;
+                        hangmanView.setFrage((String) model.getFragenAntworten().keySet().toArray()[aktuellIndex]);
+                        hangmanView.getDrawingPanel().reset();
+                    }
+                } else {
+                    hangmanView.getDrawingPanel().incrementWrongAttempts();
+                    JOptionPane.showMessageDialog(frame, "Falsch! :(");
                 }
 
             }
