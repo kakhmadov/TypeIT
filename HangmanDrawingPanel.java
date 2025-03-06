@@ -14,6 +14,8 @@ public class HangmanDrawingPanel extends JPanel {
         repaint();
     }
 
+    public int getWrongAttempts()   {return wrongAttempts;}
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

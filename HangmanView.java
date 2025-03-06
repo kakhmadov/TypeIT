@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class HangmanView extends JPanel {
-    private JButton btnBeenden, btnPruefen, btnLoesung, btnNext;
+    private JButton btnBeenden, btnPruefen, btnLoesung;
     private JTextArea txtSentence;
     private JTextField txtAnswer;
     private JLabel lblImage;
@@ -63,15 +63,11 @@ public class HangmanView extends JPanel {
         btnPruefen = new JButton("PRÜFEN");
         btnPruefen.setActionCommand("HangPRUEFEN");
         btnPruefen.addActionListener(controller);
-        btnNext = new JButton("->");
-        btnNext.setActionCommand("HangNAECHSTES");
-        btnNext.addActionListener(controller);
         btnLoesung = new JButton("Lösung anzeigen");
         btnLoesung.setActionCommand("HangLOESUNG");
         btnLoesung.addActionListener(controller);
 
         bottomPanel.add(btnPruefen);
-        bottomPanel.add(btnNext);
         bottomPanel.add(btnLoesung);
 
         add(bottomPanel, BorderLayout.SOUTH);

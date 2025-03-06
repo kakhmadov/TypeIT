@@ -113,29 +113,7 @@ public class TypeITController implements ActionListener {
             }
 
             case "HangPRUEFEN" -> {
-/*
-                System.out.println(hangmanView.getTxtAnswer().getText());
-                boolean richtig =  model.isCorrect((String) model.getFragenAntworten().keySet().toArray()[aktuellIndex], hangmanView.getTxtAnswer().getText());
 
-                if (aktuellIndex < model.getFragenAntworten().size() - 1) {
-                    aktuellIndex++;
-                }
-
-                String ersteFrage = (String) model.getFragenAntworten().keySet().toArray()[aktuellIndex] ;// Holen der ersten Frage basierend auf dem Index
-                hangmanView = new HangmanView(this);
-                hangmanView.setFrage(ersteFrage);
-                frame.getContentPane().removeAll();
-                frame.setContentPane( hangmanView );
-                frame.revalidate();
-                frame.repaint();
-
-                if (richtig){
-                    JOptionPane.showMessageDialog(frame, "Richtig Bravo :)");
-                }else{
-                    JOptionPane.showMessageDialog(frame,"Diesen Satz solltest du dir lieber noch einmal anschauen :(");
-                }
-
- */
                 String userAnswer = hangmanView.getTxtAnswer().getText();
                 String currentQuestion = hangmanView.getFrage();
                 boolean correct = model.isCorrect(currentQuestion, userAnswer);
@@ -151,6 +129,20 @@ public class TypeITController implements ActionListener {
                 } else {
                     hangmanView.getDrawingPanel().incrementWrongAttempts();
                     JOptionPane.showMessageDialog(frame, "Falsch! :(");
+                    if(hangmanView.getDrawingPanel().getWrongAttempts()==6) {
+                        JOptionPane.showMessageDialog
+                                (
+                                frame,
+                                "Oje, du hast bereits 6 falsche Antworten. \n" +
+                                        "Schaue dir nochmal die Rechtschreibung an und \n" +
+                                        "probiere es später noch einmal."
+                                );
+                        frame.setVisible(false);
+                        frame = new TypeITView(this);
+                        frame.revalidate();
+                        frame.repaint();
+                        frame.setVisible(true);
+                    }
                 }
 
             }
