@@ -11,6 +11,7 @@ public class TypeITController implements ActionListener {
     private int aktuellIndex = 0;
     private StandardModeView modeView = new StandardModeView(this);
     private FrageLoeschen loeschen = new FrageLoeschen(this);
+    private HangmanView hangmanView = new HangmanView(this);
 
     public TypeITController() {
         view = new TypeITView(this);
@@ -224,6 +225,69 @@ public class TypeITController implements ActionListener {
                 TreeMap<String, String> loadedMap = TypeITModel.load("PoolBinary");
                 model.setFragenAntworten(loadedMap);
             }
+            case "HANGMAN" -> {
+                try {
+
+                    frame.setVisible(false);
+                    frame.getContentPane().removeAll();
+                    hangmanView = new HangmanView(this);
+                    frame.setContentPane(hangmanView);
+                    frame.revalidate();
+                    frame.repaint();
+                    frame.setVisible(true);
+                    String ersteFrage = (String) model.getFragenAntworten().keySet().toArray()[aktuellIndex];// Holen der ersten Frage basierend auf dem Index
+                    hangmanView.setFrage(ersteFrage);
+
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(frame, "Sie müssen zuerst einen Fragepool hinzufügen um zu Spielen");
+                    frame.setVisible(false);
+                    frame = new TypeITView(this);
+                    frame.revalidate();
+                    frame.repaint();
+                    frame.setVisible(true);
+                }
+            }
+
+            case "HangLOESUNG" ->   {
+                JOptionPane.showMessageDialog(frame,"Die richtige Antwort lautet:\n "  + model.showAnswer(hangmanView.getFrage()));
+            }
+
+            case "HangPRUEFEN" -> {
+
+                String userAnswer = hangmanView.getTxtAnswer().getText();
+                String currentQuestion = hangmanView.getFrage();
+                boolean correct = model.isCorrect(currentQuestion, userAnswer);
+
+                if (correct) {
+                    JOptionPane.showMessageDialog(frame, "Richtig! :)");
+                    // Move to next question
+                    if (aktuellIndex < model.getFragenAntworten().size() - 1) {
+                        aktuellIndex++;
+                        hangmanView.setFrage((String) model.getFragenAntworten().keySet().toArray()[aktuellIndex]);
+                        hangmanView.getDrawingPanel().reset();
+                    }
+                } else {
+                    hangmanView.getDrawingPanel().incrementWrongAttempts();
+                    JOptionPane.showMessageDialog(frame, "Falsch! :(");
+                    if(hangmanView.getDrawingPanel().getWrongAttempts()==6) {
+                        JOptionPane.showMessageDialog
+                                (
+                                        frame,
+                                        "Oje, du hast bereits 6 falsche Antworten. \n" +
+                                                "Schaue dir nochmal die Rechtschreibung an und \n" +
+                                                "probiere es später noch einmal."
+                                );
+                        frame.setVisible(false);
+                        frame = new TypeITView(this);
+                        frame.revalidate();
+                        frame.repaint();
+                        frame.setVisible(true);
+                    }
+                }
+
+            }
+
+
         }
     }
 }

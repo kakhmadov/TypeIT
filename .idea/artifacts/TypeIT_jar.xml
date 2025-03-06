@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TypeIT:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/TypeIT_jar</output-path>
+    <root id="archive" name="TypeIT.jar">
+      <element id="module-output" name="TypeIT" />
+    </root>
+  </artifact>
+</component>

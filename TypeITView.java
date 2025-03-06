@@ -67,6 +67,8 @@ public class TypeITView extends JFrame {
 
         standardButton.setPreferredSize(new Dimension(200, 50));
         hangmanButton.setPreferredSize(new Dimension(200, 50));
+        hangmanButton.setActionCommand("HANGMAN");
+        hangmanButton.addActionListener(controller);
         quizButton.setPreferredSize(new Dimension(200, 50));
         manageQuestionsButton.setPreferredSize(new Dimension(200, 50));
 
